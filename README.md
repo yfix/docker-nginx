@@ -27,5 +27,5 @@ Nginx Development Kit, Upload Progress, Upstream Fair Queue.
 ## Usage
 
 ```bash
-$ docker run -ti --rm -v /path/to/nginx:/etc/nginx -p 8080:80 xdrum/nginx-extras
+$ docker run -ti --rm -v /path/to/nginx:/etc/nginx -p 8081:80 yfix/nginx-extras
 ```
