@@ -1,4 +1,4 @@
-# xdrum/docker-nginx-extras
+# yfix/docker-nginx-extras
 Nginx extended version: provides a version of nginx with the standard modules, plus extra features and modules,
 this container is based on ubuntu:14.04 (trusty) and the official PPA.
 ## Tags:
