@@ -1,0 +1,6 @@
+nginx:
+  image: yfix/nginx
+  container_name: yfix_nginx
+  ports:
+    - 30180:80
+  restart: always
