@@ -1,14 +1,10 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 
 MAINTAINER Yuri Vysotskiy (yfix) <yfix.dev@gmail.com>
 
-# http://www.ubuntuupdates.org/ppa/nginx?dist=trusty
-ENV NGINX_VERSION 1.8.0-1+trusty1
-
-RUN echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" > /etc/apt/sources.list.d/nginx-stable.list && \
-  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C && \
+RUN echo "deb http://httpredir.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
   apt-get update && \
-  apt-get install -y nginx-extras=${NGINX_VERSION} && \
+  apt-get -t jessie-backports install -y nginx-extras && \
   apt-get autoremove -y && \
   apt-get clean -y && \
   ln -sf /dev/stdout /var/log/nginx/access.log; \
