@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM yfix/baseimage
 
 MAINTAINER Yuri Vysotskiy (yfix) <yfix.dev@gmail.com>
 
@@ -18,5 +18,3 @@ RUN echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" > /etc/a
 COPY container-files /
 
 EXPOSE 80 443
-
-CMD ["nginx", "-g", "daemon off;"]
