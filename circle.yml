@@ -1,0 +1,46 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t yfix/nginx .
+
+    # Do basic test in `dependencies` section - it doesn't make to continue if it fails here
+    - docker run -d --name nginx yfix/nginx
+    - docker logs -f nginx > ${CIRCLE_ARTIFACTS}/docker-nginx.log:
+        background: true
+    - sleep 3
+    - docker logs nginx | grep "nginx entered RUNNING state"
+    - docker rm -f nginx || true
+
+# Run tests
+test:
+  override:
+    - docker run -d -p 8080:80 -p 8043:443 --name nginx yfix/nginx
+    - while true; do if docker logs nginx | grep "nginx entered RUNNING state"; then break; else sleep 1; fi done
+    - curl -sSLi http://localhost:8080 | grep '200 OK'
+    - curl -sSLi --insecure https://localhost:8043 | grep '200 OK'
+    - docker rm -f nginx || true
+
+    #
+    # Test config reload
+    #
+#    - docker run -d --name nginx-reload -p 8181:80 yfix/nginx
+#    - docker logs -f nginx-reload > ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log 2>&1:
+#        background: true
+#    - while true; do if grep "nginx entered RUNNING state" -a ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log; then break; else sleep 1; fi done
+#    - grep 'nginx entered RUNNING state' ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log
+#    - grep 'nginx-reload entered RUNNING state' ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log
+#    - curl -s --head http://localhost:8181 | grep "HTTP/1.1 200 OK"
+#    # make a change and test for reload...
+#    - docker run -ti --volumes-from nginx-reload yfix/nginx "echo '' >> /data/conf/nginx/hosts.d/some-host.conf" && sleep 1
+#    - grep 'nginx.conf syntax is ok' ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log
+#    - grep 'signal 1 (SIGHUP) received, reconfiguring' ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log
+#    - grep 'gracefully shutting down' ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log
+#    - curl -s --head http://localhost:8181 | grep "HTTP/1.1 200 OK"
+#    # make invalid change and test: nginx should not be restarted and should still be accessible
+#    - docker run -ti --volumes-from nginx-reload yfix/nginx "echo 'blabla;' >> /data/conf/nginx/hosts.d/some-host.conf" && sleep 1
+#    - grep 'nginx.conf test failed' ${CIRCLE_ARTIFACTS}/docker-nginx-reload.log
+#    - curl -s --head http://localhost:8181 | grep "HTTP/1.1 200 OK"
+#    - docker rm -f nginx-reload || true
