@@ -1,9 +1,12 @@
 nginx:
-  image: yfix/nginx
+  image: yfix/nginx:supervisor
   container_name: yfix_nginx
   ports:
-    - 30180:80
+    - 30181:80
   restart: always
   volumes:
+    - ./container-files/etc/nginx:/etc/nginx
     - ./container-files/var/cache/nginx:/var/cache/nginx
-#    - ./container-files/etc/nginx:/etc/nginx
+    - ./container-files/etc/supervisor/conf.d/nginx.conf:/etc/supervisor/conf.d/nginx.conf
+    - ./container-files/var/log/supervisor:/var/log/supervisor
+    - ./container-files/var/www:/var/www
