@@ -5,9 +5,9 @@ nginx:
     - 30181:80
   restart: always
   volumes:
-    - ./container-files/etc/nginx:/etc/nginx
-    - ./container-files/var/cache/nginx:/var/cache/nginx
-    - ./container-files/var/log/nginx:/var/log/nginx
-    - ./container-files/etc/supervisor/conf.d/nginx.conf:/etc/supervisor/conf.d/nginx.conf
-    - ./container-files/var/log/supervisor:/var/log/supervisor
-    - ./container-files/var/www:/var/www
+    - ./docker/etc/nginx:/etc/nginx
+    - ./docker/var/cache/nginx:/var/cache/nginx
+    - ./docker/var/log/nginx:/var/log/nginx
+    - ./docker/etc/supervisor/conf.d/nginx.conf:/etc/supervisor/conf.d/nginx.conf
+    - ./docker/var/log/supervisor:/var/log/supervisor
+    - ./docker/var/www:/var/www
