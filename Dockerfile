@@ -1,4 +1,4 @@
-FROM yfix/baseimage:alpine
+FROM alpine
 
 MAINTAINER Yuri Vysotskiy (yfix) <yfix.dev@gmail.com>
 
