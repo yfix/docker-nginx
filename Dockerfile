@@ -19,8 +19,8 @@ ENV CONFIG "\
 	--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \
 	--http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \
 	--http-scgi-temp-path=/var/cache/nginx/scgi_temp \
-	--user=nginx \
-	--group=nginx \
+	--user=www-data \
+	--group=www-data \
 	--with-http_ssl_module \
 	--with-http_realip_module \
 	--with-http_addition_module \
@@ -50,8 +50,8 @@ ENV CONFIG "\
 	"
 
 RUN \
-	addgroup -S nginx \
-	&& adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
+	addgroup --gid 33 -S www-data \
+	&& adduser --uid 33 -D -S -h /var/cache/nginx -s /sbin/nologin -G www-data www-data \
 	&& apk add --no-cache --virtual .build-deps \
 		gcc \
 		libc-dev \
@@ -67,7 +67,7 @@ RUN \
 		geoip-dev \
 		perl-dev \
 	&& curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
-	&& curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
+	&& curl -fSL http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc -o nginx.tar.gz.asc \
 	&& export GNUPGHOME="$(mktemp -d)" \
 	&& gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEYS" \
 	&& gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
