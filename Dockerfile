@@ -50,8 +50,8 @@ ENV CONFIG "\
 	"
 
 RUN \
-	addgroup --gid 33 -S www-data \
-	&& adduser --uid 33 -D -S -h /var/cache/nginx -s /sbin/nologin -G www-data www-data \
+	addgroup -g 82 -S www-data \
+	&& adduser -u 82 -D -S -h /var/cache/nginx -s /sbin/nologin -G www-data www-data \
 	&& apk add --no-cache --virtual .build-deps \
 		gcc \
 		libc-dev \
