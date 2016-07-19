@@ -1,4 +1,10 @@
 # yfix/docker-nginx
+
+[![CircleCI](https://img.shields.io/circleci/project/yfix/docker-nginx/release.svg)](https://circleci.com/gh/yfix/docker-nginx)
+[![Docker Stars](https://img.shields.io/docker/stars/yfix/nginx.svg)](https://hub.docker.com/r/yfix/nginx 'Docker Stars')
+[![Docker Pulls](https://img.shields.io/docker/pulls/yfix/nginx.svg)](https://hub.docker.com/r/yfix/nginx 'Docker Pulls')
+[![ImageLayers](https://imagelayers.io/badge/yfix/nginx.svg)](https://imagelayers.io/?images=yfix/nginx:latest 'Get your own badge on imagelayers.io')
+
 Nginx extended version: provides a version of nginx with the standard modules, plus extra features and modules,
 this container is based on ubuntu:14.04 (trusty) and the official PPA.
 ## Tags:
