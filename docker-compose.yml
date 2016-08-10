@@ -1,13 +1,15 @@
-nginx:
-  image: yfix/nginx
-  container_name: yfix_nginx
-  ports:
-    - 30181:80
-  restart: always
-  volumes:
-    - ./docker/etc/nginx:/etc/nginx
-    - ./docker/var/cache/nginx:/var/cache/nginx
-    - ./docker/var/log/nginx:/var/log/nginx
-    - ./docker/etc/supervisor/conf.d/nginx.conf:/etc/supervisor/conf.d/nginx.conf
-    - ./docker/var/log/supervisor:/var/log/supervisor
-    - ./docker/var/www:/var/www
+version: '2'
+services:
+  nginx:
+    image: yfix/nginx
+    container_name: yfix_nginx
+    ports:
+      - 30181:80
+    restart: always
+    volumes:
+      - ./docker/etc/nginx:/etc/nginx
+      - ./docker/var/cache/nginx:/var/cache/nginx
+      - ./docker/var/log/nginx:/var/log/nginx
+      - ./docker/etc/supervisor/conf.d/nginx.conf:/etc/supervisor/conf.d/nginx.conf
+      - ./docker/var/log/supervisor:/var/log/supervisor
+      - ./docker/var/www:/var/www
