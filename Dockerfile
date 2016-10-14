@@ -1,8 +1,8 @@
-FROM yfix/baseimage
+FROM yfix/baseimage:16.04
 
 MAINTAINER Yuri Vysotskiy (yfix) <yfix.dev@gmail.com>
 
-RUN echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" > /etc/apt/sources.list.d/nginx-stable.list \
+RUN echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu xenial main" > /etc/apt/sources.list.d/nginx-stable.list \
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C \
   \
   && apt-get update && apt-get install -y \
