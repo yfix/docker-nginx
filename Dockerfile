@@ -8,6 +8,10 @@ RUN echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu bionic main" > /etc/a
   && apt-get update && apt-get install -y \
     nginx-extras \
   \
+  && nginx -v \
+  && nginx -V \
+  && nginx -t \
+  \
   && apt-get autoremove -y \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* \
