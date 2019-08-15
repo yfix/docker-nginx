@@ -115,6 +115,11 @@ RUN \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN echo "== Simple tests ==" \
+  && nginx -v \
+  && nginx -V \
+  && nginx -t
+
 COPY docker /
 
 EXPOSE 80 443
